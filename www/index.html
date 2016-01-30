@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html ng-app="weatherApp" ng-controller="weatherController">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">    
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com http://maps.gstatic.com http://csi.gstatic.com/csi https://query.yahooapis.com https://poweredby.yahoo.com http://maps.googleapis.com http://fonts.googleapis.com 'unsafe-eval'; style-src * 'unsafe-inline' ; font-src *  ;media-src *">
+    <title>Weather App</title>
+
+    <!-- CSS -->
+    <link href="css/jquery.mobile-1.4.5.min.css" rel="stylesheet" />
+    <link href="css/theme-classic.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+
+    <!-- Google -->
+    <script src="http://maps.google.com/maps/api/js?key=AIzaSyDnVTkc02_qNTpXKewOQjwOJqijaFfUWPo"></script>
+
+    <!-- jQuery -->
+    <script src="scripts/jquery/jquery-1.12.0.min.js"></script>
+    <script src="scripts/jquery/jquery.mobile-1.4.5.min.js"></script>
+
+    <!-- AngularJS-->
+    <script src="scripts/angularjs/angular.min.js"></script>
+    <script src="scripts/angularjs/angular-resource.min.js"></script>
+    <script src="scripts/angularjs/angular-route.min.js"></script>
+
+    <!-- App -->
+    <script src="scripts/app/app.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/app/services/utility.js"></script>
+    <script src="scripts/app/services/notify.js"></script>
+    <script src="scripts/app/services/device.js"></script>
+    <script src="scripts/app/services/storage/locationsStorage.js"></script>
+    <script src="scripts/app/services/storage/settingsStorage.js"></script>
+    <script src="scripts/app/services/storage/storage.js"></script>
+    <script src="scripts/app/services/system.js"></script>  
+    <script src="scripts/app/services/map.js"></script>       
+    <script src="scripts/app/services/geolocation.js"></script>
+    <script src="scripts/app/services/weather.js"></script>   
+
+    <!-- Controllers -->
+    <script src="scripts/app/controllers/weather.js"></script>
+
+    <!-- Cordova reference, this is added to your app when it's built. -->
+    <script src="cordova.js"></script>
+    <script src="scripts/platformOverrides.js"></script>
+</head>
+<body>
+    <div id="home-page" data-role="page">
+
+        <!-- MAIN CONTENT -->
+        <div role="main" class="ui-content main-content">
+
+            <!-- HEADER -->
+            <header data-role="header" id="main-header">
+                <a id="btn-home" data-icon="home" data-iconpos="notext" class="ui-btn-left" href="" ng-click="home()">Refresh</a>
+                <h1 ng-bind="title" ng-hide="location.name != undefined && location.name != ''"></h1>
+                <h1 ng-bind="location.name" ng-hide="location.name == undefined || location.name == ''"></h1>
+                <a id="btn-refresh" data-icon="refresh" data-iconpos="notext" class="ui-btn-right" href="" ng-click="refresh()">Refresh</a>
+            </header>
+            
+            <!-- OVERVIEW DISPLAY -->
+            <header data-role="header" class="ui-grid-a" id="main-display">
+                <div class="ui-block-a temp-display"><span ng-bind="weatherDisplay.temp" class="font-big"></span><span class="tempUnitDisplay" ng-bind="weatherDisplay.tempUnitDisplay"></span></div> <!--<span id="temp"></span><span class="tempDegMain" id="tempDegMain"></span>-->
+                <div class="ui-block-b"><img ng-src="{{weatherDisplay.mainImage}}" class="big-weather-image"/></div>
+            </header>
+
+            <!-- LIST OPTIONS -->
+            <header data-role="header"  id="list-options">                
+                <fieldset data-role="controlgroup" data-type="horizontal" class="full-width" data-mini="true">
+                    <input name="forecast-choice" id="forecast-choice-1" ng-model="viewTodaysForecast" ng-value="true" type="radio">
+                    <label for="forecast-choice-1" ng-class="{'ui-btn-active ui-radio-on': viewTodaysForecast == true}">Today</label>
+                    <input name="forecast-choice" id="forecast-choice-2" ng-model="viewTodaysForecast" ng-value="false" type="radio">
+                    <label for="forecast-choice-2" ng-class="{'ui-btn-active ui-radio-on': viewTodaysForecast == false}">5 Day</label>
+                 </fieldset>               
+            </header>
+
+            <!-- TODAY'S FORECAST-->
+            <ul data-role="listview" id="todays-weather" class="list" ng-show="viewTodaysForecast">
+                <li>
+                    <div class="flex">
+                        <div>Outlook:</div>
+                        <div ng-bind="weatherDisplay.outlook"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Max Temp:</div>
+                        <div ng-bind="weatherDisplay.maxTemp"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Min Temp:</div>
+                        <div ng-bind="weatherDisplay.minTemp"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Wind Speed:</div>
+                        <div ng-bind="weatherDisplay.windSpeed"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Wind Chill:</div>
+                        <div ng-bind="weatherDisplay.windChill"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Humidity:</div>
+                        <div ng-bind="weatherDisplay.humidity"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Visibility:</div>
+                        <div ng-bind="weatherDisplay.visibility"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Sunrise:</div>
+                        <div ng-bind="weatherDisplay.sunrise"></div>
+                    </div>
+                </li>
+                <li>
+                    <div class="flex">
+                        <div>Sunset:</div>
+                        <div ng-bind="weatherDisplay.sunset"></div>
+                    </div>
+                </li>
+            </ul>
+
+            <!-- 5 DAY FORECAST -->
+            <ul data-role="listview" id="fiveday-weather" class="list" ng-show="!viewTodaysForecast">
+                <li ng-repeat="forecast in fiveDayForecast" class='forecast-item'>
+                    <div class='ui-grid-a'>
+                        <div class='ui-block-a'>
+                            <span class='forecast-date' ng-bind='forecast.date'>date</span>
+                            <span ng-bind="forecast.minTempDisplay + ' / ' + forecast.maxTempDisplay"></span>
+                        </div>
+                        <div class='ui-block-b'><img class='small-weather-image' ng-src="{{forecast.weatherImage}}" /></div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- LEFT PANEL -->
+        <div data-role="panel" id="left-panel" data-display="push">
+
+            <!-- LOCATIONS LIST -->
+            <ul id="location-list" class="ui-listview">
+                <li ng-repeat="location in locations">
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <a data-role="button" data-icon="delete"  href="" ng-click="deleteLocation(location)">&nbsp;</a>
+                        <a data-role="button" data-icon="carat-r" data-iconpos="right" href="" data-rel="close" ng-click="selectLocation(location)"><span ng-bind="location.name"></span></a>
+                    </div>                        
+                </li>
+            </ul>
+
+            <!-- SETTINGS -->
+            <div id="settings">
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <input name="distanceUnit" id="distanceMiles" type="radio" ng-model="settings.distanceUnit" ng-value="'mi'">
+                    <label for="distanceMiles" ng-class="{'ui-btn-active ui-radio-on': settings.distanceUnit == 'mi'}">Miles</label>
+                    <input name="distanceUnit" id="distanceKilometers" type="radio" ng-model="settings.distanceUnit" ng-value="'km'">
+                    <label for="distanceKilometers" ng-class="{'ui-btn-active ui-radio-on': settings.distanceUnit == 'km'}">Kilometers</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <input name="tempUnit" id="tempUnitCelcius" type="radio" ng-model="settings.tempUnit" ng-value="'C'">
+                    <label for="tempUnitCelcius" ng-class="{'ui-btn-active ui-radio-on': settings.tempUnit == 'C'}">Celcius</label>
+                    <input name="tempUnit" id="tempUnitFahrenheit" type="radio" ng-model="settings.tempUnit" ng-value="'F'">
+                    <label for="tempUnitFahrenheit" ng-class="{'ui-btn-active ui-radio-on': settings.tempUnit == 'F'}">Fahrenheit</label>
+                </fieldset>
+                <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                    <input name="speedUnit" id="tempUnitmph" type="radio" ng-model="settings.speedUnit" ng-value="'mph'">
+                    <label for="tempUnitmph" ng-class="{'ui-btn-active ui-radio-on': settings.speedUnit == 'mph'}">mph</label>
+                    <input name="speedUnit" id="speedUnitkph" type="radio" ng-model="settings.speedUnit" ng-value="'kph'">
+                    <label for="speedUnitkph" ng-class="{'ui-btn-active ui-radio-on': settings.speedUnit == 'kph'}">kph</label>
+                </fieldset>
+            </div>
+        </div>
+
+        <!-- RIGHT PANEL -->
+        <div data-role="panel" id="right-panel" data-display="push" data-position="right">
+            <!-- HEADER -->
+            <header data-role="header" id="right-header">                               
+                <h1>Map</h1>
+                <!-- SEARCH BAR -->
+                <div class="ui-grid-b" id="search-container">
+                    <div class="ui-block-a">
+                        <a data-role="button" data-icon="arrow-l" data-iconpos="notext" href="" data-rel="close" ng-click="search(true)" ng-class="{'ui-icon-search': !disableSearchBar}"></a>
+                    </div>
+                    <div class="ui-block-b" style="position: relative;">
+                        <input type="text" id="search-input" ng-model="locationNameSearch"/>
+                    </div>
+                    <div class="ui-block-c">
+                        <a id="btn-find" data-role="button" data-icon="location" data-iconpos="notext" href="" ng-click="search(false)" ng-class="{'ui-disabled': disableSearchBar}"></a>
+                    </div>
+                </div>
+            </header>
+            <!-- MAP -->
+            <div id="map"></div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer data-role="footer" id="main-footer">
+            <h4 id="copyright-title">&copy; 2016 Paul Millar</h4>
+        </footer>
+
+        <!-- POPUPS -->
+        <div id="msg-dialog" data-role="popup" class="dialog">
+            <p class="dialog-text"></p>
+        </div>
+
+    </div>
+</body>
+</html>

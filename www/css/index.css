@@ -1,0 +1,277 @@
+﻿/**************************************************/
+/* MISC */
+/**************************************************/
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#home-page{
+    height: 100%;
+}
+
+ul{
+    margin: 0;
+    padding: 0;
+    overflow:hidden; 
+    overflow-y:scroll;
+}
+
+.ui-content{
+    padding: 0;
+}
+
+li.ui-li-static{
+    border:none !important;
+}
+
+.full-width{
+    width: 100%;
+}
+
+a, img{
+    border: 0 !important;
+    outline: none !important;
+}
+
+.ng-hide {
+  /* this is just another form of hiding an element */
+  display: none;
+}
+
+.ui-controlgroup-controls{
+    width: 100%;
+}
+
+
+/**************************************************/
+/* FONTS */
+/**************************************************/
+@font-face {
+    font-family: opensanslight;
+    src: url(../fonts/OpenSans-Light.ttf);
+}
+
+.font-big {
+    font-family: opensanslight;
+    font-size: 60px;
+}
+
+
+/**************************************************/
+/* IMAGES */
+/**************************************************/
+.small-weather-image{
+    width: 70px;
+    height: 45px;
+}
+
+.big-weather-image{
+    width: 138px;
+    height: 99px;
+    padding: 15px;
+}
+
+.ui-block-b > img{
+    float: right;
+}
+
+
+/**************************************************/
+/* DIALOGS */
+/**************************************************/
+.error-dialog{
+    background: red !important;
+    background-color: red !important;
+    border-color: red !important;
+}
+
+.info-dialog{
+    background: dodgerblue !important;
+    background-color: dodgerblue !important;
+    border-color: dodgerblue !important;
+}
+
+.dialog-text{
+    color: #fff;
+}
+
+
+/**************************************************/
+/* SWIPE PANELS */
+/**************************************************/
+/* Swipe works with mouse as well but often causes text selection. */
+/* We'll deny text selecton on everything but INPUTs and TEXTAREAs. */
+#home-page :not(INPUT):not(TEXTAREA) {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+#right-panel{
+    width: 100% !important;
+}
+
+.ui-panel-inner{
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+/**************************************************/
+/* TEMPERATURE DISPLAY */
+/**************************************************/
+.temp-display{
+    padding-top: 24px;
+    padding-left: 34px;
+}
+
+.tempUnitDisplay{
+    line-height: 44px;
+    vertical-align:top;
+}
+
+
+/**************************************************/
+/* LIST CHANGER */
+/**************************************************/
+fieldset.ui-controlgroup{
+    margin: 0px !important;
+    border-radius: 0;
+}
+
+.ui-radio{
+    width: 50%;
+}
+
+.ui-radio .ui-btn{
+    border-radius: 0 !important;
+    width: 100%;
+    margin: 0px;
+    padding: 0.8em 0 !important;
+    text-align:center;
+}
+
+
+/**************************************************/
+/* LISTS */
+/**************************************************/
+.ui-listview, .ui-panel-inner > .ui-listview {
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+
+/**************************************************/
+/* TODAYS WEATHER LIST */
+/**************************************************/
+.flex{
+    display: -webkit-box;
+    display: flex;
+    padding-left: 4px;
+}
+
+.flex > div:nth-child(2) {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    text-align: right;
+    padding-right: 4px;
+}
+
+
+/**************************************************/
+/* 5 DAY FORECAST */
+/**************************************************/
+li.forecast-item{
+    padding: 14px 10px 13.5px 10px !important;    
+    background: #222 !important;
+}
+
+li.forecast-item .ui-block-a{
+    width: 70% !important;
+    font-size: 14px;
+}
+
+li.forecast-item .ui-block-b{
+    width: 30% !important;
+}
+
+li.forecast-item .ui-block-a .forecast-date{
+    margin-top: 8px;
+    margin-bottom: 4px;
+    display: block;
+}
+
+
+/**************************************************/
+/* LOCATION LIST */
+/**************************************************/
+#location-list {
+    width: 100% !important;
+}
+#location-list > li {
+    margin: 2px 1px !important;
+} 
+
+#location-list div {
+    margin: 0px !important;
+}
+
+#location-list .ui-controlgroup-controls .ui-first-child{
+    width: 20% !important;
+    min-width: 20% !important;    
+    padding: 15px 0 !important;
+}
+
+#location-list .ui-controlgroup-controls .ui-last-child{
+    width: 80% !important;
+    min-width: 80% !important;
+    padding: 15px 0 !important;
+}
+
+#location-list span {
+    float: left;
+    padding: 0 10px;
+}
+
+
+/**************************************************/
+/* MAP */
+/**************************************************/
+#map {
+    position: relative;
+    width:100% ;
+    display: block;
+}
+
+#right-header{  padding-bottom: 1px !important; z-index: 10000;}
+
+#search-container .ui-btn-icon-notext.ui-corner-all {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    padding: 7px 12px !important;
+    margin: 0px !important;
+}
+
+#search-container .ui-block-a{ width: 52px !important; }
+#search-container .ui-block-c{ width: 52px !important; }
+
+#search-container .ui-input-text, #search-container .ui-input-search {
+    margin: 0 !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 0 !important;
+}
+
+#search-container .ui-input-text input {
+    padding: .55em !important;
+}
+
+#btn-clear{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
