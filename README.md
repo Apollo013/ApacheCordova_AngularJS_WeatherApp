@@ -21,3 +21,4 @@ Developed in VS2015, this is an Apache Cordova Hybrid App that will resolve your
 * Deferred Promises using $q
 * Accessing external services with $resource
 * Data Binding
+* $watch & $watchCollection for listening to changes to $scope variables
