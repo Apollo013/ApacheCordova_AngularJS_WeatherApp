@@ -1,5 +1,5 @@
 # ApacheCordova_AngularJS_WeatherApp
-Developed in VS2015, this is an Apache Cordova Hybrid App that will resolve your current location and fetch the weather details for that area. It also allows you to select pre-defined locations from a list and pick a location from google maps.
+Developed in VS2015, this is an Apache Cordova Hybrid App that will resolve your current location and fetch the weather details for that area. It also allows you to select pre-defined locations from a list or pick a location from google maps.
 
 ####Technologies & Features####
 * Visual Studio 2015
@@ -10,7 +10,7 @@ Developed in VS2015, this is an Apache Cordova Hybrid App that will resolve your
 
 ####Service Api's####
 * Yahoo Weather Api
-* Google Location Api
+* Google Location/GeoCoding Api
 
 ####Apache Cordova Plugins####
 * GeoLocation
@@ -21,4 +21,4 @@ Developed in VS2015, this is an Apache Cordova Hybrid App that will resolve your
 * Deferred Promises using $q
 * Accessing external services with $resource
 * Data Binding
-* $watch & $watchCollection for listening to changes to $scope variables
+* $watch & $watchGroup for listening to changes in $scope variables
